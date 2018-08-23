@@ -1,0 +1,7 @@
+---
+# tasks file for ansible_burpui_agent/
+
+- include: multi_os.yml
+
+- include: config_agent.yml
+  when: burp_module_agent
