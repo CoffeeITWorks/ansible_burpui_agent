@@ -1,0 +1,52 @@
+---
+
+- name: supervisor | Install supervisor
+  package:
+    name: supervisor
+    state: present
+
+- name: supervisor | configure supervisor logrotate
+  template:
+    src: supervisor_logrotate.j2
+    dest: /etc/logrotate.d/supervisor
+
+- name: supervisor | check bui-agent path
+  stat:
+    path: /usr/local/bin/bui-agent
+  register: bui_agent_local_bin
+
+- name: change pip_installed_exe_bin_path when using local bin
+  set_fact:
+    pip_installed_exe_bin_path: /usr/local/bin
+  when: bui_agent_local_bin.stat.exists
+
+# only run if burp_module_agent: true
+- name: supervisor | configure supervisor services for buiagent
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: "buiagent.conf_supervisor.j2", dest: "{{ supervisoretc_dir }}/buiagent.{{ supervisor_ext }}" }
+  notify:
+    - restart supervisor
+  when: burp_module_agent
+
+- name: supervisor | ensure supervisor is started
+  service:
+    name: "{{ supervisor_service }}"
+    state: started
+  register: supervisor_started
+
+- name: supervisor | ensure supervisor is restarted
+  service:
+    name: "{{ supervisor_service }}"
+    state: restarted
+  register: supervisor_restarted
+  when: supervisor_started.changed == False and supervisor_burp_service_config_status.changed
+  tags:
+    - skip-ansible-lint
+
+- name: supervisor | pause 10 seconds when supervisor started
+  pause:
+    seconds: 10
+  when: supervisor_started.changed or supervisor_restarted.changed
