@@ -15,12 +15,13 @@
     path: /usr/local/bin/bui-agent
   register: bui_agent_local_bin
 
+# burpui-agent
 - name: change pip_installed_exe_bin_path when using local bin
   set_fact:
     pip_installed_exe_bin_path: /usr/local/bin
   when: bui_agent_local_bin.stat.exists
 
-# only run if burp_module_agent: true
+# burpui-agent
 - name: supervisor | configure supervisor services for buiagent
   template:
     src: "{{ item.src }}"
@@ -29,7 +30,6 @@
     - { src: "buiagent.conf_supervisor.j2", dest: "{{ supervisoretc_dir }}/buiagent.{{ supervisor_ext }}" }
   notify:
     - restart supervisor
-  when: burp_module_agent
 
 - name: supervisor | ensure supervisor is started
   service:
