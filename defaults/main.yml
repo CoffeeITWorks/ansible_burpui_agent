@@ -1,6 +1,9 @@
 ---
 # defaults file for ansible_burpui_agent/
 
+burp_usr_path: '/usr/local'
+burp_bin_path: "{{ burp_usr_path }}/sbin/burp"
+
 # if burpsrv_agent: true
 ### Burp UI Agent
 #[Global]
