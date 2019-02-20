@@ -1,8 +1,6 @@
 ---
 # file tasks/redhat.yml
 
----
-
 - name: redhat | install EPEL release package for RHEL
   yum:
     name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
