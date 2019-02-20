@@ -43,11 +43,10 @@
 
 - name: install buiagent pip packages
   pip:
-    name: "{{ item }}"
+    name: "{{ burp_agent_pip_present }}"
     state: present
     executable: "{{ python_pip_executable }}"
     extra_args: --ignore-installed six
-  with_items: "{{ burp_agent_pip_present }}"
 
 - name: Install buiagent pip
   pip:
