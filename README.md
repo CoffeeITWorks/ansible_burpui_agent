@@ -1,7 +1,11 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Burp-ui-agent only role
+
+Started since bui-agent 0.6.0
+https://burp-ui.readthedocs.io/en/0.6.0/buiagent.html
+
 
 Requirements
 ------------
