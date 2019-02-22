@@ -15,10 +15,10 @@
 
 - name: systemd | enable bui-agent service
   systemd:
+    daemon-reload: yes
     name: 'bui-agent.service'
     state: started
     enabled: yes
-    daemon-reload: yes
 
 - name: flush handlers
   meta: flush_handlers
