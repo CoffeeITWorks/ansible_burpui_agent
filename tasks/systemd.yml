@@ -16,7 +16,7 @@
 - name: systemd | enable bui-agent service
   systemd:
     daemon-reload: yes
-    name: 'bui-agent.service'
+    name: bui-agent
     state: started
     enabled: yes
 
