@@ -3,7 +3,7 @@
 
 - name: restart buiagent
   supervisorctl:
-    name: buiagent
+    name: bui-agent
     state: restarted
   when: not bui_agent_systemd
 
