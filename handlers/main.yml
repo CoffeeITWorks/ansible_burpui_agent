@@ -5,3 +5,14 @@
   supervisorctl:
     name: buiagent
     state: restarted
+  when: not bui_agent_systemd
+
+- name: systemd daemon-reload
+  systemd:
+    daemon_reload: yes
+
+- name: restart buiagent systemd
+  service:
+    name: bui-agent
+    state: restarted
+  when: bui_agent_systemd

@@ -52,3 +52,8 @@ burp_sv_agent_autostart: "true"
 burp_sv_agent_autorestart: "true"
 burp_sv_agent_stdout_logfile: "/var/log/supervisor/%(program_name)s.log"
 burp_sv_agent_stderr_logfile: "/var/log/supervisor/%(program_name)s.log"
+
+### systemd
+# Burp Agent systemd
+# On ubuntu trusty it is always changed to false
+bui_agent_systemd: true

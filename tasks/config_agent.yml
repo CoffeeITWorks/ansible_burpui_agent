@@ -55,7 +55,9 @@
     version: "{{ item.version}}"
     executable: "{{ python_pip_executable }}"
   with_items: "{{ burpui_pip_packages }}"
-  notify: restart buiagent
+  notify: 
+    - restart buiagent
+    - restart buiagent systemd
 
 - name: configure buiagent
   template:
@@ -63,12 +65,6 @@
     dest: "{{ item.dest }}"
   with_items:
     - { src: "buiagent.cfg.j2", dest: "/etc/burp/buiagent.cfg" }
-  notify: restart buiagent
-
-- name: ensure supervisor is restarted
-  service:
-    name: "{{ supervisor_service }}"
-    state: restarted
-    sleep: 5
-    enabled: True
-  changed_when: false
+  notify: 
+    - restart buiagent
+    - restart buiagent systemd

@@ -1,0 +1,13 @@
+[Unit]
+Description=Burp-UI agent service
+After=network.target
+
+[Service]
+ExecStart={{ burp_sv_agent_command }}
+User={{ burp_sv_agent_user }}
+Group={{ burp_sv_agent_user }}
+RestartSec=1
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

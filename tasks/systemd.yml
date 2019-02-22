@@ -1,0 +1,24 @@
+---
+# Setup systemd service
+# Only used when not using supervisord
+
+# burpui-agent
+- name: systemd | configure systemd service for bui-agent
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: "systemd/bui-agent.service.j2",
+        dest: "/etc/systemd/system/multi-user.target.wants/bui-agent.service" }
+#  notify:
+#    - systemd daemon-reload
+
+- name: systemd | enable bui-agent service
+  systemd:
+    name: 'bui-agent.service'
+    state: started
+    enabled: yes
+    daemon-reload: yes
+
+- name: flush handlers
+  meta: flush_handlers
