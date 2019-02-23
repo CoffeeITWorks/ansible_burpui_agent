@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/CoffeeITWorks/ansible_burpui_agent.svg?branch=master)](https://travis-ci.org/CoffeeITWorks/ansible_burpui_agent)
+
 Role Name
 =========
 
