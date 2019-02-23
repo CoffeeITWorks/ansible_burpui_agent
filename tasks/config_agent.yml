@@ -56,8 +56,8 @@
     executable: "{{ python_pip_executable }}"
   with_items: "{{ burpui_pip_packages }}"
   notify: 
-    - restart buiagent
-    - restart buiagent systemd
+    - restart bui-agent
+    - restart bui-agent systemd
 
 - name: configure buiagent
   template:
@@ -66,5 +66,5 @@
   with_items:
     - { src: "buiagent.cfg.j2", dest: "/etc/burp/buiagent.cfg" }
   notify: 
-    - restart buiagent
-    - restart buiagent systemd
+    - restart bui-agent
+    - restart bui-agent systemd

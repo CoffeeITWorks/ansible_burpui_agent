@@ -1,7 +1,7 @@
 ---
 # handlers file for ansible_burpui_agent/
 
-- name: restart buiagent
+- name: restart bui-agent
   supervisorctl:
     name: bui-agent
     state: restarted
@@ -11,7 +11,7 @@
   systemd:
     daemon_reload: yes
 
-- name: restart buiagent systemd
+- name: restart bui-agent systemd
   service:
     name: bui-agent
     state: restarted
