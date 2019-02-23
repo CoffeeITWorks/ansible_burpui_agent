@@ -1,3 +1,4 @@
-master
+1.0
 
 * #1 create first version from current burp2_server playbooks
+* Use systemd by default on Ubuntu 16+ and Centos/RedHat or Debian.
