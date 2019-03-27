@@ -3,7 +3,15 @@
 * update burpui-agent to 0.6.4 (Fix: sync pkgs requirements with burp-ui's `#300 <https://git.ziirish.me/ziirish/burp-ui/issues/300>`__)
 * Update python3 to python3.6 on Redhat/Centos
 
-1.0
+1.0.2
+
+* Update burpui-agent to 0.6.3
+
+1.0.1
+
+* Update burpui-agent to 0.6.2
+
+1.0.0
 
 * #1 create first version from current burp2_server playbooks
 * Use systemd by default on Ubuntu 16+ and Centos/RedHat or Debian.
