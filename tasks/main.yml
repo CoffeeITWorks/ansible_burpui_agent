@@ -33,7 +33,7 @@
   register: pip3_executable_stat
 
 - name: set /usr/bin if /usr/bin/pip3 exists
-  register:
+  set_fact:
     python_pip_root_path: "/usr/bin"
   when: pip3_executable_stat.stat.exists
 
