@@ -27,16 +27,6 @@
     path: '/usr/bin/pip2'
   register: pip2_executable_stat
 
-- name: stat to see if /usr/bin/pip3 exists
-  stat:
-    path: '/usr/bin/pip3'
-  register: pip3_executable_stat
-
-- name: set /usr/bin if /usr/bin/pip3 exists
-  set_fact:
-    python_pip_root_path: "/usr/bin"
-  when: pip3_executable_stat.stat.exists
-
 - include: config_agent.yml
 
 - include: supervisor.yml
