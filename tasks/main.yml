@@ -11,11 +11,6 @@
   delay: 2
   when: python_pip_executable != "pip3"
 
-- name: stat to see if pip2 exists
-  stat:
-    path: '/usr/bin/pip2'
-  register: pip2_executable_stat
-
 - name: install buiagent packages for pip3
   package:
     name: "{{ burp_agent_py3_packages| join(',') }}"
@@ -26,6 +21,21 @@
 
 - include: redhat.yml
   when: ansible_os_family == "RedHat"
+
+- name: stat to see if /usr/bin/pip2 exists
+  stat:
+    path: '/usr/bin/pip2'
+  register: pip2_executable_stat
+
+- name: stat to see if /usr/bin/pip3 exists
+  stat:
+    path: '/usr/bin/pip3'
+  register: pip3_executable_stat
+
+- name: set /usr/bin if /usr/bin/pip3 exists
+  register:
+    python_pip_root_path: "/usr/bin"
+  when: pip3_executable_stat.stat.exists
 
 - include: config_agent.yml
 

@@ -18,7 +18,8 @@
   when: ansible_distribution == 'CentOS'
 
 - name: redhat | ensure pip3 command setup is done
-  shell: "{{ python_pip_root_path }}/easy_install-3.6 pip"
-  args:
-    creates: "{{ python_pip_root_path }}/pip3"
+  easy_install:
+    name: pip
+    state: latest
+    executable: easy_install-3.6
   when: ansible_distribution != "Fedora" and python_pip_executable == 'pip3'
