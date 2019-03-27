@@ -23,6 +23,7 @@
       - python36
       - python36-devel
       - python36-pip
+      - python36-setuptools
       - redhat-rpm-config
   when: ansible_distribution != "Fedora" and python_pip_executable == 'pip3'
 
