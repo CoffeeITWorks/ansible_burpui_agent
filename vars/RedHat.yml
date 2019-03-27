@@ -11,7 +11,6 @@ burp_agent_py3_packages:
   - python36
   - python36-devel
   - python36-setuptools
-  - python36-pip
   - redhat-rpm-config
   - libffi-devel # burpui dependency for cffi package
 
