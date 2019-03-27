@@ -1,43 +1,6 @@
 ---
 # file defaults/config_agent.yml
 
-- name: install buiagent packages
-  package:
-    name: "{{ burp_agent_packages| join(',') }}"
-    state: present
-  retries: 3
-  delay: 2
-  when: python_pip_executable != "pip3"
-
-# workaround for ubuntu 14.04 with missing pip3 executable
-- block:
-
-    - name: stat to see if pip3 executable is present
-      stat:
-        path: '/usr/bin/pip3'
-      register: pip3_executable_stat
-
-    - name: Absent python3-pip if /usr/bin/pip3 is not present
-      package:
-        name: 'python3-pip'
-        state: absent
-      when: not pip3_executable_stat.stat.exists
-
-  when: ansible_distribution_release == 'trusty'
-
-- name: stat to see if pip2 exists
-  stat:
-    path: '/usr/bin/pip2'
-  register: pip2_executable_stat
-
-- name: install buiagent packages for pip3
-  package:
-    name: "{{ burp_agent_py3_packages| join(',') }}"
-    state: present
-  retries: 3
-  delay: 2
-  when: python_pip_executable == "pip3"
-
 - name: Uninstall buiagent pip2 packages when using pip3 as pip executable
   pip:
     name: "{{ burp_agent_pip_burpui }}"
@@ -51,7 +14,7 @@
   pip:
     name: "{{ burp_agent_pip_present }}"
     state: present
-    executable: "{{ python_pip_executable }}"
+    executable: "{{ python_pip_root_path }}/{{ python_pip_executable }}"
     extra_args: --ignore-installed six
   retries: 3
   delay: 2
@@ -61,7 +24,7 @@
     name: "{{ item.name }}"
     state: present
     version: "{{ item.version }}"
-    executable: "{{ python_pip_executable }}"
+    executable: "{{ python_pip_root_path }}/{{ python_pip_executable }}"
   with_items: "{{ burpui_pip_packages }}"
   retries: 3
   delay: 2

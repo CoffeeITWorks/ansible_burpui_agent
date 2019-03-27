@@ -11,10 +11,12 @@ burp_agent_py3_packages:
   - python36
   - python36-devel
   - python36-setuptools
+  - python36-pip
   - redhat-rpm-config
   - libffi-devel # burpui dependency for cffi package
 
 supervisoretc_dir: "/etc/supervisor/conf.d"
 supervisor_ext: "conf"
 supervisor_service: supervisord
-pip_installed_exe_bin_path: '/usr/bin'
+pip_installed_exe_bin_path: '/usr/local/bin'
+python_pip_root_path: '/usr/local/bin'
