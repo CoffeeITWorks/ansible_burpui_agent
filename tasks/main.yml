@@ -3,8 +3,29 @@
 
 - include: multi_os.yml
 
+- name: install buiagent packages
+  package:
+    name: "{{ burp_agent_packages| join(',') }}"
+    state: present
+  retries: 3
+  delay: 2
+  when: python_pip_executable != "pip3"
+
+- name: install buiagent packages for pip3
+  package:
+    name: "{{ burp_agent_py3_packages| join(',') }}"
+    state: present
+  retries: 3
+  delay: 2
+  when: python_pip_executable == "pip3"
+
 - include: redhat.yml
   when: ansible_os_family == "RedHat"
+
+- name: stat to see if /usr/bin/pip2 exists
+  stat:
+    path: '/usr/bin/pip2'
+  register: pip2_executable_stat
 
 - include: config_agent.yml
 

@@ -18,6 +18,7 @@ supervisoretc_dir: "/etc/supervisor/conf.d"
 supervisor_ext: "conf"
 supervisor_service: supervisor
 pip_installed_exe_bin_path: '/usr/local/bin'
+python3_pip: 'pip3'
 
 # Use supervisord on Ubuntu trusty
 bui_agent_systemd: false
