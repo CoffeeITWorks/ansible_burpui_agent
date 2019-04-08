@@ -1,3 +1,7 @@
+1.1.1
+
+* Update burpui-agent to 0.6.6
+
 1.1.0
 
 * update burpui-agent to 0.6.5 (Fix: sync pkgs requirements with burp-ui's `#300 <https://git.ziirish.me/ziirish/burp-ui/issues/300>`__)
