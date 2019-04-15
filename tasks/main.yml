@@ -3,6 +3,11 @@
 
 - include: multi_os.yml
 
+- name: install requirements for ansible pip
+  package:
+    name: ['python-setuptools']
+    state: present
+
 - name: install buiagent packages
   package:
     name: "{{ burp_agent_packages| join(',') }}"
