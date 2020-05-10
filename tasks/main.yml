@@ -35,7 +35,7 @@
 - include: config_agent.yml
 
 - include: supervisor.yml
-  when: not bui_agent_systemd
+  when: not bui_agent_systemd | bool
 
 - include: systemd.yml
-  when: bui_agent_systemd
+  when: bui_agent_systemd | bool
