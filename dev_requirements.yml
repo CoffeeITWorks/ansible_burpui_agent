@@ -2,3 +2,5 @@
 - src: https://github.com/CoffeeITWorks/ansible_burp2_server.git
   version: master
   name: ansible_burp2_server
+- src: https://github.com/robertdebock/ansible-role-powertools
+  name: ansible-role-powertools

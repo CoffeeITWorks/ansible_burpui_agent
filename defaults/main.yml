@@ -3,6 +3,7 @@
 
 burp_usr_path: '/usr/local'
 burp_bin_path: "{{ burp_usr_path }}/sbin/burp"
+burp_server_etc: '/etc/burp'
 
 # if burpsrv_agent: true
 ### Burp UI Agent
@@ -12,6 +13,8 @@ burp_agent_global_bind: "0.0.0.0"
 burp_agent_global_ssl: "false"
 burp_agent_global_version: "2"
 burp_agent_global_password: "password"
+burp_server_ssl_cert: "{{ burp_server_etc }}/ssl_cert-server.pem"
+burp_server_ssl_key: "{{ burp_server_etc }}/ssl_cert-server.key"
 #[Security]
 burp_agent_security_includes: "/etc/burp"
 burp_agent_security_enforce: "false"
