@@ -1,3 +1,7 @@
+1.2.1
+
+* multiple fixes of missing vars and others tasks.
+
 1.2.0
 
 * updates for molecule v4 and ansible galaxy meta file
