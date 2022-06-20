@@ -5,7 +5,7 @@
 
 - name: install requirements for ansible pip
   package:
-    name: ['python-setuptools']
+    name: ['python3-setuptools']
     state: present
 
 - name: install buiagent packages
