@@ -1,4 +1,3 @@
----
 dependency:
   name: galaxy
   options:
@@ -6,13 +5,13 @@ dependency:
     ignore-errors: True
     role-file: dev_requirements.yml  # this file is at the root of the git project same place as molecule is executed
 driver:
-  name: podman
+  name: docker
 platforms:
 
   - name: ansible_burpui_agent-01
-    image: "geerlingguy/docker-ubuntu2204-ansible:latest"
-    #privileged: True
-    command: "/lib/systemd/systemd"
+    image: "docker.io/geerlingguy/docker-ubuntu2204-ansible:latest"
+    privileged: True
+    command: /sbin/init
     pre_build_image: true
     capabilities:
       - SYS_ADMIN
@@ -31,5 +30,5 @@ provisioner:
       callbacks_enabled: profile_tasks, timer, yaml
       interpreter_python: auto_silent
     ssh_connection:
-      pipelining: false
+      pipelining: true
       ssh_args: -o ControlMaster=auto -o ControlPersist=60s

@@ -61,3 +61,6 @@ fabric.properties
 # VSCode
 .vscode
 .cache
+
+ansible_burp2_server
+ansible-role-powertools

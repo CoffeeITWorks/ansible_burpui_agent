@@ -1,39 +1,6 @@
 ---
 # file defaults/config_agent.yml
 
-- name: Uninstall buiagent pip2 packages when using pip3 as pip executable
-  pip:
-    name: "{{ burp_agent_pip_burpui }}"
-    state: absent
-    executable: "pip2"
-  retries: 3
-  delay: 2
-  when: python_pip_executable == "pip3" and pip2_executable_stat.stat.exists
-
-- name: install buiagent pip2 packages
-  pip:
-    name: "{{ burp_agent_pip_present }}"
-    state: present
-    executable: "pip2"
-    extra_args: --ignore-installed six
-  retries: 3
-  delay: 2
-  when: python_pip_executable != "pip3"
-
-- name: Install buiagent pip2
-  pip:
-    name: "{{ item.name }}"
-    state: present
-    version: "{{ item.version }}"
-    executable: "pip2"
-  with_items: "{{ burpui_pip_packages }}"
-  retries: 3
-  delay: 2
-  when: python_pip_executable != "pip3"
-  notify:
-    - restart bui-agent
-    - restart bui-agent systemd
-
 - name: install buiagent pip3 packages
   pip:
     name: "{{ burp_agent_pip_present }}"
@@ -42,7 +9,6 @@
     extra_args: --ignore-installed six
   retries: 3
   delay: 2
-  when: python_pip_executable == "pip3"
 
 - name: Install buiagent pip3
   pip:
@@ -53,7 +19,6 @@
   with_items: "{{ burpui_pip_packages }}"
   retries: 3
   delay: 2
-  when: python_pip_executable == "pip3"
   notify:
     - restart bui-agent
     - restart bui-agent systemd
