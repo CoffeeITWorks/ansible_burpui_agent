@@ -2,9 +2,9 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: Include ansible_burp2_server
-      include_role: 
-        name: ansible_burp2_server
+   # - name: Include ansible_burp2_server
+   #   include_role: 
+   #     name: ansible_burp2_server
     - name: Include ansible_burpui_agent
       include_role: 
         name: ansible_burpui_agent
