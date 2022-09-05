@@ -1,17 +1,11 @@
 ---
 # file: vars/Redhat.yml
 
-burp_agent_packages:
-  - python-pip
-  - python-devel
-  - redhat-rpm-config # This is required to build ujson, if not install pip got error: gcc: error: /usr/lib/rpm/redhat/redhat-hardened-cc1: No such file or directory
-  - libffi-devel # burpui dependency for cffi package
-
 burp_agent_py3_packages:
-  - python36
-  - python36-devel
-  - python36-setuptools
-  - python36-pip
+  - python38
+  - python38-devel
+  - python38-setuptools
+  - python38-pip
   - redhat-rpm-config
   - libffi-devel # burpui dependency for cffi package
 
@@ -19,4 +13,4 @@ supervisoretc_dir: "/etc/supervisor/conf.d"
 supervisor_ext: "conf"
 supervisor_service: supervisord
 pip_installed_exe_bin_path: '/usr/local/bin'
-python3_pip: 'pip3.6'
+python3_pip: 'pip3.8'

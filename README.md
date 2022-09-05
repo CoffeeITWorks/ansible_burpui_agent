@@ -24,8 +24,7 @@ You can change the burpui version with vars:
 
 ```yaml
 burp_agent_pip_burpui: "burp-ui-agent"
-burpui_pip_packages:
-  - { name: "{{ burp_agent_pip_burpui }}", version: 0.6.1 }
+burpui_pip_package: "{{ burp_agent_pip_burpui }}==0.6.6"
 ```
 
 You must change the global password:
