@@ -1,22 +1,38 @@
 ---
 # file defaults/config_agent.yml
 
-- name: install buiagent pip3 packages
+# https://github.com/ansible/ansible/issues/28952
+- name: update pip to avoid idempotence issues
   pip:
-    name: "{{ burp_agent_pip_present }}"
+    name: "pip>=22.2.2"
     state: present
     executable: "{{ python3_pip }}"
-    extra_args: --ignore-installed six
   retries: 3
   delay: 2
 
+# for some pip packages we need to use requirements file to fix idempotence issues
+- name: config_agent | copy pip_requirements_burp_agent_pip_present file
+  template:
+    src: "pip_requirements_burp_agent_pip_present.j2"
+    dest: "/tmp/pip_requirements_burp_agent_pip_present.txt"
+
+# use package name==version or name>=version to avoid
+# issues with pip idempotence
+- name: install buiagent pip3 packages
+  pip:
+    requirements: "/tmp/pip_requirements_burp_agent_pip_present.txt"
+    state: present
+    executable: "{{ python3_pip }}"
+  retries: 3
+  delay: 2
+
+# use package name==version or name>=version to avoid
+# issues with pip idempotence
 - name: Install buiagent pip3
   pip:
-    name: "{{ item.name }}"
+    name: "{{ burpui_pip_package }}"
     state: present
-    version: "{{ item.version }}"
     executable: "{{ python3_pip }}"
-  with_items: "{{ burpui_pip_packages }}"
   retries: 3
   delay: 2
   notify:
