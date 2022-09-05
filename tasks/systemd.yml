@@ -23,6 +23,9 @@
     name: bui-agent
     state: started
     enabled: yes
+  # For some reason ubuntu 22.04 failed in idempotence test here
+  # Adding workaround for idempotence
+  changed_when: false
 
 - name: flush handlers
   meta: flush_handlers
