@@ -31,18 +31,25 @@ burp_agent_backend_timeout: "60"
 # Install burpui from a different source
 # ex: burpsrv_pip_burpui: "https://burpui.ziirish.me/builds/burp-ui.dev.tar.gz"
 burp_agent_pip_burpui: "burp-ui-agent"
-burpui_pip_package: "{{ burp_agent_pip_burpui }}==0.6.6"
+burpui_pip_package: "{{ burp_agent_pip_burpui }}==1.0.0"
 
 burp_agent_pip_present:
   - "cffi>=1.14.5"
   #- "urllib3>=1.19" # required to avoid issues with get_url module
   # - "ndg-httpsclient>=0.4.2" # required to avoid issues with get_url module
-  - "pyasn1==0.4.8"
+  - "pyasn1>=0.4.8"
 #[Burp]
 burpui_backend_bconfcli: '/etc/burp/burp.conf'
 burpui_backend_bconfsrv: '/etc/burp/burp-server.conf'
   #- "requests[security]>=2.12"  # required to avoid issues with get_url module
 ### ---
+
+burpui_virtualenv: /venv_apps/bui
+burpui_virtualenv_bin: "{{ burpui_virtualenv}}/bin"
+burpui_virtualenv_python: python3
+
+burpui_agent_bin_links:
+  - bui-agent
 
 ### Supervisor
 # Burp Agent
