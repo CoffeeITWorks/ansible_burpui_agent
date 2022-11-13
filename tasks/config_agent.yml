@@ -10,6 +10,12 @@
   retries: 3
   delay: 2
 
+- name: config_agent | install virtualenv from pip3
+  pip:
+    name: "virtualenv>=20.16.6"
+    state: present
+    executable: "pip3"
+
 # for some pip packages we need to use requirements file to fix idempotence issues
 - name: config_agent | copy pip_requirements_burp_agent_pip_present file
   template:
