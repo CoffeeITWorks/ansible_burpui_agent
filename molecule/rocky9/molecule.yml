@@ -1,3 +1,4 @@
+---
 dependency:
   name: galaxy
   options:
@@ -8,25 +9,10 @@ driver:
   name: docker
 platforms:
 
-  - name: ansible_burpui_agent-01
-    image: "geerlingguy/docker-ubuntu2004-ansible:latest"
-    #privileged: True
+  - name: ansible_burpui_agent-rocky9
+    image: "docker.io/geerlingguy/docker-rockylinux9-ansible:latest"
     command: /sbin/init
-    pre_build_image: true
-    capabilities:
-      - SYS_ADMIN
-    tmpfs:
-      - /run
-      - /tmp
-    volumes:
-      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
-    groups:
-      - group1
-
-  - name: ansible_burpui_agent-04
-    image: "geerlingguy/docker-centos8-ansible"
-    #privileged: True
-    command: /sbin/init
+    privileged: True
     pre_build_image: true
     capabilities:
       - SYS_ADMIN
@@ -43,6 +29,3 @@ provisioner:
   config_options:
     defaults:
       callback_enabled: profile_tasks
-    ssh_connection:
-      pipelining: true
-      ssh_args: -o ControlMaster=auto -o ControlPersist=60s

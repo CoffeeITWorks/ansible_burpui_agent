@@ -2,13 +2,19 @@
 # file defaults/config_agent.yml
 
 # https://github.com/ansible/ansible/issues/28952
-- name: update pip to avoid idempotence issues
+- name: config_agent | update pip to avoid idempotence issues
   pip:
     name: "pip>=22.2.2"
     state: present
     executable: "{{ python3_pip }}"
   retries: 3
   delay: 2
+
+- name: config_agent | install virtualenv from pip3
+  pip:
+    name: "virtualenv>=20.16.6"
+    state: present
+    executable: "pip3"
 
 # for some pip packages we need to use requirements file to fix idempotence issues
 - name: config_agent | copy pip_requirements_burp_agent_pip_present file
@@ -18,28 +24,30 @@
 
 # use package name==version or name>=version to avoid
 # issues with pip idempotence
-- name: install buiagent pip3 packages
+- name: config_agent | install buiagent pip3 packages
   pip:
     requirements: "/tmp/pip_requirements_burp_agent_pip_present.txt"
     state: present
-    executable: "{{ python3_pip }}"
+    virtualenv: "{{ burpui_virtualenv }}"
+    virtualenv_python: "{{ burpui_virtualenv_python }}"
   retries: 3
   delay: 2
 
 # use package name==version or name>=version to avoid
 # issues with pip idempotence
-- name: Install buiagent pip3
+- name: config_agent | Install buiagent pip3
   pip:
     name: "{{ burpui_pip_package }}"
     state: present
-    executable: "{{ python3_pip }}"
+    virtualenv: "{{ burpui_virtualenv }}"
+    virtualenv_python: "{{ burpui_virtualenv_python }}"
   retries: 3
   delay: 2
   notify:
     - restart bui-agent
     - restart bui-agent systemd
 
-- name: configure buiagent
+- name: config_agent | configure buiagent
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -48,3 +56,13 @@
   notify:
     - restart bui-agent
     - restart bui-agent systemd
+
+- name: bui-celery | workaround link to /bin/celery
+  ansible.builtin.file:
+    src: "{{ burpui_virtualenv_bin }}/{{ item }}"
+    dest: "{{ pip_installed_exe_bin_path }}/{{ item }}"
+    owner: root
+    group: root
+    mode: '0755'
+    state: link
+  with_items: "{{ burpui_agent_bin_links }}"

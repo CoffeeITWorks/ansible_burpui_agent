@@ -18,6 +18,14 @@
 - import_tasks: redhat.yml
   when: ansible_os_family == "RedHat"
 
+- name: main | create virtualenv dir
+  ansible.builtin.file:
+    path: "{{ burpui_virtualenv }}"
+    state: directory 
+    owner: root
+    group: root
+    mode: '0755'
+
 - import_tasks: config_agent.yml
 
 - import_tasks: supervisor.yml

@@ -2,10 +2,9 @@
 # file: vars/Redhat.yml
 
 burp_agent_py3_packages:
-  - python38
-  - python38-devel
-  - python38-setuptools
-  - python38-pip
+  - python3
+  - python3-devel
+  - python3-setuptools
   - redhat-rpm-config
   - libffi-devel # burpui dependency for cffi package
 
@@ -13,4 +12,4 @@ supervisoretc_dir: "/etc/supervisor/conf.d"
 supervisor_ext: "conf"
 supervisor_service: supervisord
 pip_installed_exe_bin_path: '/usr/local/bin'
-python3_pip: 'pip3.8'
+python3_pip: 'pip3'

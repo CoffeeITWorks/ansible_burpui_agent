@@ -17,8 +17,7 @@ jobs:
       matrix:
         # Better to use one scenario per OS for faster performance and easier debugging
         scenario:
-          - centos-8
-          - ubuntu-2004
+          # - rocky9 # Don't test until we enable crb on ansible_burp2_server role
           - ubuntu-2204
     steps:
 
