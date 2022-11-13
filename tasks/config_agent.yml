@@ -22,7 +22,6 @@
   pip:
     requirements: "/tmp/pip_requirements_burp_agent_pip_present.txt"
     state: present
-    version: "{{ item.version}}"
     virtualenv: "{{ burpui_virtualenv }}"
     virtualenv_python: "{{ burpui_virtualenv_python }}"
   retries: 3
@@ -34,7 +33,6 @@
   pip:
     name: "{{ burpui_pip_package }}"
     state: present
-    version: "{{ item.version}}"
     virtualenv: "{{ burpui_virtualenv }}"
     virtualenv_python: "{{ burpui_virtualenv_python }}"
   retries: 3
