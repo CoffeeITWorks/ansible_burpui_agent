@@ -15,6 +15,7 @@ burp_agent_global_version: "2"
 burp_agent_global_password: "password"
 burp_server_ssl_cert: "{{ burp_server_etc }}/ssl_cert-server.pem"
 burp_server_ssl_key: "{{ burp_server_etc }}/ssl_cert-server.key"
+burp_agent_global_init_wait: '15'
 #[Security]
 burp_agent_security_includes: "/etc/burp"
 burp_agent_security_enforce: "false"
