@@ -9,7 +9,7 @@ driver:
   name: docker
 platforms:
 
-  - name: ansible_burpui_server-rocky9
+  - name: ansible_burpui_agent-rocky9
     image: "docker.io/geerlingguy/docker-rockylinux9-ansible:latest"
     command: /sbin/init
     privileged: True

@@ -9,7 +9,7 @@ driver:
   name: podman
 platforms:
 
-  - name: ansible_burpui_rocky9
+  - name: ansible_burpui_agent_rocky9
     image: "docker.io/geerlingguy/docker-rockylinux9-ansible:latest"
     #privileged: True
     command: "/lib/systemd/systemd"
